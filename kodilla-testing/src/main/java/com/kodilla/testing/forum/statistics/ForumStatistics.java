@@ -7,9 +7,9 @@ public class ForumStatistics {
     int usersCount;
     int postsCount;
     int commentsCount;
-    int avgPostsPerUser;
-    int avgCommentsPerUser;
-    int avgCommentsPerPost;
+    double avgPostsPerUser;
+    double avgCommentsPerUser;
+    double avgCommentsPerPost;
 
     public ForumStatistics(Statistics stats) {
         this.stats = stats;
@@ -21,14 +21,14 @@ public class ForumStatistics {
         postsCount = statistics.postsCount();
         commentsCount = statistics.commentsCount();
         if (usersCount != 0) {
-            avgPostsPerUser = postsCount / usersCount;
-            avgCommentsPerUser = commentsCount / usersCount;
+            avgPostsPerUser = postsCount / (double)usersCount;
+            avgCommentsPerUser = commentsCount / (double)usersCount;
         } else {
             avgPostsPerUser = 0;
             avgCommentsPerUser = 0;
         }
         if (postsCount != 0)
-            avgCommentsPerPost = commentsCount / postsCount;
+            avgCommentsPerPost = commentsCount / (double)postsCount;
         else
             avgCommentsPerPost = 0;
     }
