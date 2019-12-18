@@ -46,12 +46,8 @@ public class WorldTestSuite {
         continentsList.add(europe);
 
         //When
-        BigDecimal totalPeople = BigDecimal.ZERO;
-        for (Continent continent : continentsList) {
-            for (Country country : continent.getCountryList()) {
-                totalPeople = totalPeople.add(country.getPeopleQuantity());
-            }
-        }
+        World world = new World(continentsList);
+        BigDecimal totalPeople = world.getPeopleQuantity();
 
         //Then
         BigDecimal expectedPeople = new BigDecimal("1958751144");
