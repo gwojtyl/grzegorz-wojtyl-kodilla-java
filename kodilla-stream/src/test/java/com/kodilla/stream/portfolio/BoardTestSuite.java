@@ -151,7 +151,7 @@ public class BoardTestSuite {
         double daysSpentWorkingOnTask = project.getTaskLists().stream()
                 .filter(inProgressTasks::contains)
                 .flatMap(tl -> tl.getTasks().stream())
-                .mapToInt(t -> Math.abs(t.getCreated().compareTo(LocalDate.now())))
+                .mapToInt(t -> Period.between(t.getCreated(), LocalDate.now()).getDays())
                 .average()
                 .orElse(0);
 
