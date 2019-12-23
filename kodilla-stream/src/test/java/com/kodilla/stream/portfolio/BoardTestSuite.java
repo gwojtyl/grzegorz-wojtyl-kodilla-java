@@ -6,6 +6,7 @@ import java.time.LocalDate;
 import java.time.Period;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.IntStream;
 
 import static java.time.temporal.ChronoUnit.DAYS;
 import static java.util.stream.Collectors.toList;
@@ -147,20 +148,14 @@ public class BoardTestSuite {
         List<TaskList> inProgressTasks = new ArrayList<>();
         inProgressTasks.add(new TaskList("In progress"));
 
-        long tasksCount = project.getTaskLists().stream()
-                .filter(inProgressTasks::contains)
-                .mapToLong(tl -> tl.getTasks().size())
-                .sum();
-
-        LocalDate days = project.getTaskLists().stream()
+        double daysSpentWorkingOnTask = project.getTaskLists().stream()
                 .filter(inProgressTasks::contains)
                 .flatMap(tl -> tl.getTasks().stream())
-                .map(Task::getCreated)
-                .reduce(LocalDate.now(), (daysInProgress, startedDate) -> daysInProgress.plus(Period.between(LocalDate.now(), startedDate)));
-
-        long daysSpentWorkingOnTask = DAYS.between(days, LocalDate.now());
+                .mapToInt(t -> Math.abs(t.getCreated().compareTo(LocalDate.now())))
+                .average()
+                .orElse(0);
 
         //Then
-        Assert.assertEquals(10, daysSpentWorkingOnTask / tasksCount);
+        Assert.assertEquals(10, daysSpentWorkingOnTask, 0);
     }
 }
