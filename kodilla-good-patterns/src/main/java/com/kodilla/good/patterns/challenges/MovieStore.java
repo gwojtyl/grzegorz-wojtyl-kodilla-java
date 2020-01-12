@@ -21,7 +21,7 @@ public final class MovieStore {
         flashTranslations.add("Błyskawica");
         flashTranslations.add("Flash");
 
-        final Map<String, List<String>> booksTitlesWithTranslations = new HashMap<>();
+        Map<String, List<String>> booksTitlesWithTranslations = new HashMap<>();
         booksTitlesWithTranslations.put("IM", ironManTranslations);
         booksTitlesWithTranslations.put("AV", avengersTranslations);
         booksTitlesWithTranslations.put("FL", flashTranslations);
