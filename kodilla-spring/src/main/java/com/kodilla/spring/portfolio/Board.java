@@ -5,17 +5,29 @@ public final class Board {
     final TaskList inProgressList;
     final TaskList doneList;
 
-    public Board() {
-        toDoList = new TaskList("To do list");
-        inProgressList = new TaskList("In progress list");
-        doneList = new TaskList("Done list");
+    public Board(final TaskList toDoList, final TaskList inProgressList, final TaskList doneList) {
+        this.toDoList = toDoList;
+        this.inProgressList = inProgressList;
+        this.doneList = doneList;
     }
 
-    public String printTaskList(TaskList taskList) {
-        return "Tasks: " + taskList.getTasks();
+    public void addTask(String taskName, TaskList taskListName) {
+        taskListName.addTask(taskName);
     }
 
-    public void addTask(String task, TaskList taskList) {
-        taskList.getTasks().add(task);
+    public TaskList getToDoList() {
+        return toDoList;
+    }
+
+    public TaskList getDoneList() {
+        return doneList;
+    }
+
+    public TaskList getInProgressList() {
+        return inProgressList;
+    }
+
+    public String toString() {
+        return toDoList.toString() + "\n" + inProgressList + "\n" + doneList;
     }
 }

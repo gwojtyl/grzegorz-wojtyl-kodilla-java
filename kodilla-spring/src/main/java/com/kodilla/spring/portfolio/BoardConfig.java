@@ -8,26 +8,26 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class BoardConfig {
     @Autowired
-    @Qualifier("doneList")
+    @Qualifier("toDoList")
     TaskList taskList;
 
     @Bean
     public Board getBoard() {
-        return new Board();
+        return new Board(getToDoList(), getInProgressList(), getDoneList());
     }
 
     @Bean(name = "toDoList")
     public TaskList getToDoList() {
-        return new TaskList("To do list");
+        return new TaskList("toDoList");
     }
 
     @Bean(name = "inProgressList")
     public TaskList getInProgressList() {
-        return new TaskList("In progress list");
+        return new TaskList("inProgressList");
     }
 
     @Bean(name = "doneList")
     public TaskList getDoneList() {
-        return new TaskList("Done list");
+        return new TaskList("doneList");
     }
 }
