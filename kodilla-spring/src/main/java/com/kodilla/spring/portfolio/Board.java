@@ -13,6 +13,7 @@ public final class Board {
 
     public void addTask(String taskName, TaskList taskListName) {
         taskListName.addTask(taskName);
+        System.out.println(taskListName.toString());
     }
 
     public TaskList getToDoList() {

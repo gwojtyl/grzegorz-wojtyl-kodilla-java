@@ -26,16 +26,15 @@ public final class TaskList {
     }
 
     public String toString() {
-        String result = " ";
+        String result = "";
         for (String task : tasks) {
-            result += task;
+            result += "\n" + task ;
         }
         return name + ": " + result;
     }
 
     public List<String> addTask(String taskName) {
         tasks.add(taskName);
-        System.out.println(tasks.toString());
         return tasks;
     }
 }
