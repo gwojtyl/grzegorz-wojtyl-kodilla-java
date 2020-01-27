@@ -28,14 +28,16 @@ public class FlightsSystem {
     }
 
     public Flight getConnectingFlight (String from, String to) {
-        Flight start = flights.stream().filter(flight -> flight.getFrom().equals(from)).findAny().orElse(null);
-        Flight stop = flights.stream().filter(flight -> flight.getTo().equals(to)).findAny().orElse(null);
-        try {
-            if (start.getTo().equals(stop.getFrom())) {
-                return new Flight(from, to, stop.getFrom());
-            }
-        } catch (NullPointerException e) {
-            System.out.println("Flight from " + from + " to " + to + " does not exist");
+        Flight arrive = flights.stream()
+                .filter(flight -> flight.getTo().equals(to))
+                .findAny()
+                .orElse(new Flight("", ""));
+        Flight depart = flights.stream()
+                .filter(flight -> flight.getFrom().equals(from) && flight.getTo().equals(arrive.getFrom()))
+                .findAny()
+                .orElse(new Flight("", ""));
+        if (depart.getTo().equals(arrive.getFrom())) {
+            return new Flight(from, to, arrive.getFrom());
         }
         return new Flight("", "");
     }
