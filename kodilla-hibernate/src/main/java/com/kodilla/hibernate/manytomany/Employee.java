@@ -1,16 +1,21 @@
 package com.kodilla.hibernate.manytomany;
 
-import com.kodilla.hibernate.task.Task;
-
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 
-@NamedQuery(
-        name = "Employee.retrieveEmployeesWithLastname",
-        query = "FROM Employee WHERE lastname like :LASTNAME"
-)
+@NamedQueries({
+        @NamedQuery(
+                name = "Employee.retrieveEmployeesWithLastname",
+                query = "FROM Employee WHERE lastname like :LASTNAME"
+        ),
+        @NamedQuery(
+                name = "Employee.findByField",
+                query = "FROM Employee WHERE lastname like :ARG"
+        )
+})
+
 
 @Entity
 @Table(name = "EMPLOYEES")
